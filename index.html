@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>25 Años de Aniversario | Centro de Educación Alternativa Noel Kempf Mercado B</title>
+
+    <!-- Enlace a la hoja de estilo de Animate.css para animaciones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Enlace a la hoja de estilo de AOS (Animaciones de desplazamiento) -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Enlace a Particles.js para efectos visuales -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
     <style>
         /* Estilos generales */
         body {
@@ -13,41 +23,11 @@
             background-color: #2E8B57;
             color: white;
             text-align: center;
-            animation: fadeIn 2s;
             overflow-x: hidden;
         }
 
         h1, h2 {
             margin-top: 20px;
-        }
-
-        /* Fondo animado */
-        @keyframes rain {
-            0% { top: -100px; }
-            100% { top: 100%; }
-        }
-
-        .rain {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #FFD700;
-            border-radius: 50%;
-            animation: rain 1s infinite linear;
-        }
-
-        .confetti {
-            position: absolute;
-            background-color: #FFD700;
-            border-radius: 50%;
-            width: 8px;
-            height: 8px;
-            animation: confettiAnim 2s infinite ease-in-out;
-        }
-
-        @keyframes confettiAnim {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(50px) rotate(360deg); opacity: 0; }
         }
 
         /* Estilo del logo */
@@ -103,36 +83,7 @@
             font-weight: bold;
         }
 
-        /* Animación de aparición */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        /* Títulos */
-        .title {
-            color: #FFD700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
-            font-size: 3rem;
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        /* Estilos para la fecha y hora */
-        .date-time {
-            font-size: 22px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            margin: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Efecto de transición al hacer hover sobre los botones */
+        /* Efectos de transición al hacer hover sobre los botones */
         .btn {
             background-color: #FFD700;
             color: #2E8B57;
@@ -151,11 +102,12 @@
 </head>
 <body>
 
-    <!-- Efectos de lluvia de confites -->
-    <div id="rainContainer"></div>
+    <!-- Efectos de partículas -->
+    <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
 
-    <h1 class="title">¡Celebremos Juntos!</h1>
-    <h2 class="subtitle">25 Años de Aniversario y Bodas de Plata</h2>
+    <!-- Efectos de animación de texto -->
+    <h1 class="animate__animated animate__fadeInDown animate__delay-1s">¡Celebremos Juntos!</h1>
+    <h2 class="animate__animated animate__fadeInUp animate__delay-1s">25 Años de Aniversario y Bodas de Plata</h2>
 
     <!-- Imagen de parallax con texto -->
     <div class="parallax">
@@ -163,11 +115,11 @@
     </div>
 
     <!-- Logo del Centro de Educación Alternativa Noel Kempf Mercado B -->
-    <img src="img/escudo cea.png" class="logo" alt="Logo del Centro de Educación Alternativa Noel Kempf Mercado B">
+    <img src="https://via.placeholder.com/250" class="logo animate__animated animate__zoomIn" alt="Logo del Centro de Educación Alternativa Noel Kempf Mercado B">
 
     <div class="invitation">
-        <h2>Invitación Especial</h2>
-        <p>El Centro de Educación Alternativa Noel Kempf Mercado B se complace en invitarte a su gran evento de celebración por los 25 años de aniversario y bodas de plata.</p>
+        <h2 class="animate__animated animate__fadeInUp animate__delay-2s">Invitación Especial</h2>
+        <p class="animate__animated animate__fadeInUp animate__delay-2s">El Centro de Educación Alternativa Noel Kempf Mercado B se complace en invitarte a su gran evento de celebración por los 25 años de aniversario y bodas de plata.</p>
 
         <div class="details">
             <strong>Lugar:</strong> U.E. Juan Pablo II A<br>
@@ -175,21 +127,101 @@
             <strong>Fecha:</strong> [Fecha del evento]<br>
         </div>
 
-        <p>Nos encantaría contar con tu presencia para hacer de esta celebración algo inolvidable. ¡Te esperamos!</p>
+        <p class="animate__animated animate__fadeInUp animate__delay-2s">Nos encantaría contar con tu presencia para hacer de esta celebración algo inolvidable. ¡Te esperamos!</p>
 
-        <a href="https://www.tu-link.com" class="btn">Confirmar Asistencia</a>
+        <a href="#" class="btn animate__animated animate__fadeInUp animate__delay-3s">Confirmar Asistencia</a>
     </div>
 
+    <!-- Script de Particles.js para animación de partículas -->
     <script>
-        // Crear efectos de lluvia de confites
-        const rainContainer = document.getElementById('rainContainer');
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = `${Math.random() * 100}%`;
-            confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
-            rainContainer.appendChild(confetti);
-        }
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#FFD700"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#FFD700",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 4,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "window",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+    <!-- Script de AOS para animaciones de desplazamiento -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200, // Tiempo de animación
+            once: true // Animación solo la primera vez
+        });
     </script>
 </body>
 </html>
