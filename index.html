@@ -3,119 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>25 Años de Aniversario | Centro de Educación Alternativa Noel Kempf Mercado B</title>
+    <title>25° Aniversario - Noel Kempf Mercado B</title>
     <style>
         /* Estilos generales */
         body {
             margin: 0;
             padding: 0;
+            background: #000;
+            color: #fff;
             font-family: 'Arial', sans-serif;
-            background-color: #2E8B57;
-            color: white;
-            text-align: center;
-            animation: fadeIn 2s;
-        }
-        h1, h2 {
-            margin-top: 20px;
+            overflow: hidden;
         }
 
-        /* Fondo animado */
-        @keyframes rain {
-            0% { top: -100px; }
-            100% { top: 100%; }
-        }
-
-        .rain {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #FFD700;
-            border-radius: 50%;
-            animation: rain 1s infinite linear;
-        }
-
-        .confetti {
-            position: absolute;
-            background-color: #FFD700;
-            border-radius: 50%;
-            width: 8px;
-            height: 8px;
-            animation: confettiAnim 2s infinite ease-in-out;
-        }
-
-        @keyframes confettiAnim {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(50px) rotate(360deg); opacity: 0; }
-        }
-
-        /* Estilos del logo */
+        /* Logo animado */
         .logo {
-            width: 250px;
-            margin-top: 30px;
-            animation: bounce 2s infinite;
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            animation: float 3s infinite ease-in-out;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
+        @keyframes float {
+            0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
         }
 
-        /* Estilo de las invitaciones */
-        .invitation {
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        /* Piñatas cayendo */
+        .pinata {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://i.imgur.com/7NnZz4b.png') no-repeat;
+            background-size: cover;
+            animation: fall 3s linear forwards;
         }
 
-        .details {
-            font-size: 20px;
-            margin: 10px 0;
+        @for ($i = 1; $i <= 10; $i++) {
+            .pinata:nth-child({$i}) {
+                left: #{rand(0, 100)}%;
+                top: -50px;
+                animation-delay: #{rand(0, 5)}s;
+            }
         }
 
-        /* Animación de aparición */
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        @keyframes fall {
+            0% { opacity: 1; transform: rotate(0deg); }
+            100% { opacity: 0; transform: rotate(360deg) translateY(100vh); }
+        }
+
+        /* Tarjeta de evento */
+        .event-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 50px #ffd700;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Estrellas flotantes */
+        .star {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://i.imgur.com/8qXQ6YK.png') no-repeat;
+            background-size: cover;
+            animation: starFall 5s linear infinite;
+        }
+
+        @for ($i = 1; $i <= 20; $i++) {
+            .star:nth-child({$i}) {
+                left: #{rand(0, 100)}%;
+                top: -20px;
+                animation-delay: #{rand(0, 5)}s;
+            }
+        }
+
+        @keyframes starFall {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.5) rotate(360deg); }
+            100% { transform: scale(1) rotate(0deg) translateY(100vh); }
         }
     </style>
 </head>
 <body>
+    <!-- Logo animado -->
+    <img src="img/escudo cea.png" class="logo" alt="Logo Noel Kempf Mercado B">
 
-    <!-- Efectos de lluvia de confites -->
-    <div id="rainContainer"></div>
+    <!-- Lluvia de piñatas -->
+    @for ($i = 1; $i <= 10; $i++) {
+        <div class="pinata"></div>
+    }
 
-    <h1>¡Celebremos Juntos!</h1>
-    <h2>25 Años de Aniversario y Bodas de Plata</h2>
+    <!-- Estrellas flotantes -->
+    @for ($i = 1; $i <= 20; $i++) {
+        <div class="star"></div>
+    }
 
-    <!-- Logo del Centro de Educación Alternativa Noel Kempf Mercado B -->
-    <img src="img/escudo cea.png" class="logo" alt="Logo del Centro de Educación Alternativa Noel Kempf Mercado B">
-
-    <div class="invitation">
-        <h2>Invitación Especial</h2>
-        <p>El Centro de Educación Alternativa Noel Kempf Mercado B se complace en invitarte a su gran evento de celebración por los 25 años de aniversario y bodas de plata.</p>
-
-        <div class="details">
-            <strong>Lugar:</strong> U.E. Juan Pablo II A<br>
-            <strong>Hora:</strong> 19:00<br>
-            <strong>Fecha:</strong> [Fecha del evento]<br>
-        </div>
-
-        <p>Nos encantaría contar con tu presencia para hacer de esta celebración algo inolvidable. ¡Te esperamos!</p>
+    <!-- Tarjeta de evento -->
+    <div class="event-card">
+        <h1>🎉 25° ANIVERSARIO Y BODAS DE PLATA 🎉</h1>
+        <p><strong>Fecha:</strong> [Inserta Fecha]</p>
+        <p><strong>Hora:</strong> 19:00 hrs</p>
+        <p><strong>Lugar:</strong> U.E. Juan Pablo II A</p>
+        <p><strong>Detalles:</strong> Celebración con show artístico, entrega de reconocimientos y tradicional quema de fuegos artificiales.</p>
+        <button>RSVP</button>
     </div>
 
     <script>
-        // Crear efectos de lluvia de confites
-        const rainContainer = document.getElementById('rainContainer');
-        for (let i = 0; i < 50; i++) {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            confetti.style.left = `${Math.random() * 100}%`;
-            confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
-            rainContainer.appendChild(confetti);
-        }
+        // Efecto de confeti al cargar la página
+        window.addEventListener('load', () => {
+            const confeti = document.createElement('div');
+            confeti.style.position = 'fixed';
+            confeti.style.top = '0';
+            confeti.style.left = '0';
+            confeti.style.width = '100%';
+            confeti.style.height = '100%';
+            confeti.style.pointerEvents = 'none';
+            
+            for(let i = 0; i < 100; i++) {
+                const piece = document.createElement('div');
+                piece.style.position = 'absolute';
+                piece.style.width = `${Math.random() * 10 + 5}px`;
+                piece.style.height = `${Math.random() * 10 + 5}px`;
+                piece.style.backgroundColor = ['#ffd700', '#9acd32', '#ff6347'][Math.floor(Math.random() * 3)];
+                piece.style.borderRadius = `${Math.random() * 100}%`;
+                piece.style.top = `${Math.random() * 100}%`;
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.animation = `fall 3s ease-in-out ${Math.random() * 2}s forwards`;
+                
+                confeti.appendChild(piece);
+            }
+            
+            document.body.appendChild(confeti);
+        });
     </script>
 </body>
 </html>
