@@ -6,6 +6,7 @@
     <title>25° Aniversario - Noel Kempf Mercado B</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         /* Variables de color */
         :root {
@@ -26,13 +27,6 @@
             font-family: 'Poppins', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        body.dark-mode {
-            --bg: #121212;
-            --card-bg: rgba(30, 30, 30, 0.9);
-            --text: #e0e0e0;
         }
 
         .container {
@@ -127,10 +121,6 @@
             border-radius: 15px;
             text-align: center;
             transition: all 0.3s;
-        }
-
-        .dark-mode .detail-card {
-            background: rgba(255,255,255,0.1);
         }
 
         .detail-card:hover {
@@ -331,32 +321,6 @@
             transform: translateX(0);
         }
 
-        /* Toggle Dark/Light Mode */
-        .toggle-dark {
-            position: fixed;
-            right: 20px;
-            top: 20px;
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            color: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--secondary);
-            z-index: 100;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
-
         /* Footer */
         footer {
             background: rgba(0,0,0,0.3);
@@ -401,22 +365,17 @@
     <!-- Contenedor de efectos -->
     <div class="effects-container" id="effectsContainer"></div>
 
-    <!-- Toggle Dark/Light Mode -->
-    <div class="toggle-dark" id="darkModeToggle">
-        <i class="fas fa-sun"></i>
-    </div>
-
     <!-- Header -->
     <header>
         <div class="container header-content">
-            <img src="img/escudo cea.png" class="logo" alt="Logo Noel Kempf Mercado B">
+            <img src="escudo cea.png" class="logo" alt="Logo Noel Kempf Mercado B">
             <h1 class="animated-title">25° ANIVERSARIO Y BODAS DE PLATA</h1>
             <p style="font-size: 1.5rem; max-width: 700px; margin: 0 auto;">Celebrando un cuarto de siglo de educación alternativa de calidad, formando profesionales comprometidos con el desarrollo sostenible de nuestra región</p>
         </div>
     </header>
 
     <!-- Tarjeta de evento -->
-    <section class="event-card section">
+    <section class="event-card section" data-aos="fade-up">
         <div class="container">
             <h2>DETALLES DEL EVENTO</h2>
             <div class="event-details">
@@ -450,7 +409,7 @@
     </section>
 
     <!-- Historia del centro -->
-    <section class="section">
+    <section class="section" data-aos="fade-up">
         <div class="container">
             <h2>Nuestra Historia</h2>
             <div class="history-content">
@@ -467,7 +426,7 @@
     </section>
 
     <!-- Galería de imágenes -->
-    <section class="section">
+    <section class="section" data-aos="fade-up">
         <div class="container">
             <h2>Galería de Momentos Inolvidables</h2>
             <div class="gallery">
@@ -479,7 +438,7 @@
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80" alt="Evento 2">
+                    <img src="https://images.unsplash.com/photo-1523580494863-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1050&q=80" alt="Evento 2">
                     <div class="gallery-overlay">
                         <h3>Feria Tecnológica</h3>
                         <p>Innovación y creatividad en acción</p>
@@ -504,27 +463,11 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Toggle Dark Mode
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const body = document.body;
-        
-        // Verificar preferencia del usuario
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            body.classList.add('dark-mode');
-            document.querySelector('.toggle-dark i').className = 'fas fa-moon';
-        }
-        
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-                document.querySelector('.toggle-dark i').className = 'fas fa-moon';
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                document.querySelector('.toggle-dark i').className = 'fas fa-sun';
-            }
+        AOS.init({
+            duration: 1000,
+            once: true
         });
 
         // Generar efectos visuales
@@ -636,24 +579,6 @@
             
             // Mostrar mensaje de confirmación
             alert('¡Gracias por confirmar tu asistencia! Te esperamos en nuestra celebración de 25 años.');
-        });
-
-        // Inicializar efectos al cargar
-        window.addEventListener('load', () => {
-            // Añadir animación inicial a las tarjetas
-            const eventDetails = document.querySelectorAll('.detail-card');
-            eventDetails.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    card.style.transition = 'opacity 0.5s, transform 0.5s';
-                    
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
-                }, index * 150);
-            });
         });
     </script>
 </body>
