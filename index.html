@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños Mi Amor</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -55,6 +56,13 @@
             font-size: 1.2rem;
             line-height: 1.6;
             margin-bottom: 1rem;
+        }
+        
+        .emoji {
+            font-size: 1.5rem;
+            margin: 0 5px;
+            animation: bounce 2s infinite;
+            display: inline-block;
         }
         
         .signature {
@@ -123,6 +131,9 @@
         
         .controls {
             margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
         
         button {
@@ -135,6 +146,9 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(255, 77, 148, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         button:hover {
@@ -148,11 +162,107 @@
             color: #a5a3e0;
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(to bottom, #ff9be0, #ff4d94);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 50px rgba(255, 77, 148, 0.8);
+            animation: scaleIn 0.5s forwards;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .close:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gifts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .gift {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 130px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .gift:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gift i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .gift p {
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+        
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ffeb3b;
+            opacity: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+        
         /* Animaciones */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         
         @keyframes fall {
@@ -182,6 +292,27 @@
             100% { transform: rotate(360deg); }
         }
         
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty)) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0);
+            }
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -195,31 +326,73 @@
             p {
                 font-size: 1rem;
             }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="hearts" id="hearts"></div>
     <div class="flowers" id="flowers"></div>
+    <div id="sparkles"></div>
     
     <div class="container">
-        <h1>¡Feliz Cumpleaños Mi Amor!</h1>
+        <h1>¡Feliz Cumpleaños Mi Amor! <span class="emoji">🎂</span></h1>
         
         <div class="message">
-            <p>En este día tan especial, quiero recordarte lo mucho que te amo y lo feliz que me haces cada día.</p>
-            <p>Eres la luz de mi vida, mi razón para sonreír cada mañana y mi mayor bendición.</p>
-            <p>Que este nuevo año de vida te traiga tanta felicidad como la que tú me das a mí.</p>
-            <p>Te amo más de lo que las palabras pueden expresar.</p>
+            <p>En este día tan especial <span class="emoji">🎉</span>, quiero recordarte lo mucho que te amo y lo feliz que me haces cada día <span class="emoji">❤️</span>.</p>
+            <p>Eres la luz de mi vida <span class="emoji">✨</span>, mi razón para sonreír cada mañana <span class="emoji">☀️</span> y mi mayor bendición <span class="emoji">🙏</span>.</p>
+            <p>Que este nuevo año de vida te traiga tanta felicidad como la que tú me das a mí <span class="emoji">😊</span>.</p>
+            <p>Te amo más de lo que las palabras pueden expresar <span class="emoji">💖</span>.</p>
             
             <div class="signature">Para mi esposa, con todo mi amor.</div>
         </div>
         
         <div class="controls">
-            <button id="playButton">Reproducir Música</button>
-            <button id="confettiButton">Lanzar Confeti</button>
+            <button id="playButton">
+                <i class="fas fa-music"></i> Reproducir Música
+            </button>
+            <button id="confettiButton">
+                <i class="fas fa-star"></i> Lanzar Confeti
+            </button>
+            <button id="surpriseButton">
+                <i class="fas fa-gift"></i> Ver Sorpresa
+            </button>
         </div>
         
         <div class="date">17 de Septiembre - Día más especial del año</div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="surpriseModal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2 class="modal-title">Tus Regalos Más Apreciados</h2>
+            <p>El amor de tu familia es el tesoro más valioso que tenemos:</p>
+            
+            <div class="gifts">
+                <div class="gift">
+                    <i class="fas fa-ring"></i>
+                    <p>Juan<br><span style="font-weight: normal;">Tu Esposo</span></p>
+                </div>
+                <div class="gift">
+                    <i class="fas fa-child"></i>
+                    <p>Zair<br><span style="font-weight: normal;">Tu Hijo</span></p>
+                </div>
+                <div class="gift">
+                    <i class="fas fa-child"></i>
+                    <p>Zoe<br><span style="font-weight: normal;">Tu Hija</span></p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <audio id="birthdayAudio">
@@ -279,6 +452,33 @@
             }
         }
         
+        // Crear efecto de chispas
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles');
+            const symbols = ['✨', '⭐', '🌟', '💫', '⚡'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                
+                // Posición aleatoria
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                
+                // Animación aleatoria
+                const tx = (Math.random() - 0.5) * 100;
+                const ty = (Math.random() - 0.5) * 100;
+                sparkle.style.setProperty('--tx', tx + 'px');
+                sparkle.style.setProperty('--ty', ty + 'px');
+                
+                sparkle.style.animation = `sparkle ${Math.random() * 3 + 2}s infinite`;
+                sparkle.style.animationDelay = Math.random() * 5 + 's';
+                
+                sparklesContainer.appendChild(sparkle);
+            }
+        }
+        
         // Controlar música
         const audio = document.getElementById('birthdayAudio');
         const playButton = document.getElementById('playButton');
@@ -286,10 +486,10 @@
         playButton.addEventListener('click', function() {
             if (audio.paused) {
                 audio.play();
-                playButton.textContent = 'Pausar Música';
+                playButton.innerHTML = '<i class="fas fa-pause"></i> Pausar Música';
             } else {
                 audio.pause();
-                playButton.textContent = 'Reproducir Música';
+                playButton.innerHTML = '<i class="fas fa-music"></i> Reproducir Música';
             }
         });
         
@@ -337,10 +537,34 @@
             };
         }
         
+        // Modal de sorpresa
+        const modal = document.getElementById('surpriseModal');
+        const surpriseButton = document.getElementById('surpriseButton');
+        const closeModal = document.getElementById('closeModal');
+        
+        surpriseButton.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            // Lanzar confeti adicional al abrir el modal
+            for (let i = 0; i < 150; i++) {
+                createConfetti();
+            }
+        });
+        
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
         // Inicializar
         window.addEventListener('load', function() {
             createHearts();
             createFlowers();
+            createSparkles();
             
             // Reproducir automáticamente después de interacción del usuario
             document.body.addEventListener('click', function autoPlay() {
