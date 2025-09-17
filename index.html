@@ -1,142 +1,356 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Cumpleaños, Mi Amor</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      color: #333;
-      text-align: center;
-    }
-
-    .content {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      width: 400px;
-    }
-
-    h1 {
-      font-size: 36px;
-      color: #ff6347;
-    }
-
-    .message {
-      font-size: 18px;
-      color: #444;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      background-color: #ff6347;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #ff4500;
-    }
-
-    .flower {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      margin: 20px auto;
-      transform-origin: center;
-      animation: rotate 5s infinite linear;
-    }
-
-    .petal {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      background-color: #ff6347;
-      border-radius: 50%;
-      opacity: 0.8;
-    }
-
-    .top {
-      top: 0;
-      left: 25%;
-    }
-
-    .right {
-      top: 25%;
-      right: 0;
-    }
-
-    .bottom {
-      bottom: 0;
-      left: 25%;
-    }
-
-    .left {
-      top: 25%;
-      left: 0;
-    }
-
-    .center {
-      position: absolute;
-      top: 25%;
-      left: 25%;
-      width: 50px;
-      height: 50px;
-      background-color: #ffeb3b;
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    @keyframes rotate {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Cumpleaños Mi Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #0c0a2b, #2c1971);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #ff4d94;
+            text-shadow: 0 0 10px rgba(255, 77, 148, 0.7);
+            animation: pulse 2s infinite;
+        }
+        
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            text-align: right;
+            margin-top: 1.5rem;
+            color: #ff9be0;
+        }
+        
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ff4d94;
+            opacity: 0;
+            animation: fall 5s linear infinite;
+        }
+        
+        .flowers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+        
+        .flower {
+            position: absolute;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .petals {
+            position: relative;
+            animation: rotate 20s infinite linear;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50% 50% 50% 0;
+            transform-origin: bottom left;
+        }
+        
+        .center {
+            width: 20px;
+            height: 20px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #ff9800;
+        }
+        
+        .controls {
+            margin-top: 2rem;
+        }
+        
+        button {
+            background: linear-gradient(to right, #ff4d94, #ff9be0);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 148, 0.5);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 77, 148, 0.7);
+        }
+        
+        .date {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #a5a3e0;
+        }
+        
+        /* Animaciones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fall {
+            0% { 
+                top: -10%; 
+                opacity: 0;
+            }
+            10% { 
+                opacity: 1;
+            }
+            90% { 
+                opacity: 1;
+            }
+            100% { 
+                top: 100%; 
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .message {
+                padding: 1.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="content">
-    <h1>🎉 ¡Feliz Cumpleaños, Mi Amor! 🎂</h1>
-    <p class="message">
-      Hoy celebramos un año más de tu vida, un año más de amor, alegría y momentos
-      inolvidables. Gracias por ser mi compañera de vida, por iluminar mis días y hacer
-      de todo un poco, algo maravilloso. ¡Te amo muchísimo! 💖
-    </p>
-    <div class="flower">
-      <div class="petal top"></div>
-      <div class="petal right"></div>
-      <div class="petal bottom"></div>
-      <div class="petal left"></div>
-      <div class="center"></div>
+    <div class="hearts" id="hearts"></div>
+    <div class="flowers" id="flowers"></div>
+    
+    <div class="container">
+        <h1>¡Feliz Cumpleaños Mi Amor!</h1>
+        
+        <div class="message">
+            <p>En este día tan especial, quiero recordarte lo mucho que te amo y lo feliz que me haces cada día.</p>
+            <p>Eres la luz de mi vida, mi razón para sonreír cada mañana y mi mayor bendición.</p>
+            <p>Que este nuevo año de vida te traiga tanta felicidad como la que tú me das a mí.</p>
+            <p>Te amo más de lo que las palabras pueden expresar.</p>
+            
+            <div class="signature">Para mi esposa, con todo mi amor.</div>
+        </div>
+        
+        <div class="controls">
+            <button id="playButton">Reproducir Música</button>
+            <button id="confettiButton">Lanzar Confeti</button>
+        </div>
+        
+        <div class="date">17 de Septiembre - Día más especial del año</div>
     </div>
-    <button onclick="changeMessage()">¡Gracias por tu amor!</button>
-  </div>
 
-  <script>
-    function changeMessage() {
-      const message = document.querySelector('.message');
-      message.innerHTML = 'Gracias por hacer de mi vida un lugar lleno de felicidad, amor y risas. ¡Te adoro, mi vida! ❤️';
-    }
-  </script>
+    <audio id="birthdayAudio">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-528.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Crear corazones
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                
+                // Posición aleatoria
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // Crear flores 3D
+        function createFlowers() {
+            const flowersContainer = document.getElementById('flowers');
+            const colors = ['#ff4d94', '#9c27b0', '#e91e63', '#ff9be0', '#f44336'];
+            
+            for (let i = 0; i < 12; i++) {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                
+                // Posición aleatoria
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.top = Math.random() * 100 + '%';
+                flower.style.animationDelay = Math.random() * 5 + 's';
+                
+                const petals = document.createElement('div');
+                petals.classList.add('petals');
+                
+                // Crear pétalos
+                for (let j = 0; j < 8; j++) {
+                    const petal = document.createElement('div');
+                    petal.classList.add('petal');
+                    petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    petal.style.transform = `rotate(${j * 45}deg) translateX(20px)`;
+                    petals.appendChild(petal);
+                }
+                
+                // Centro de la flor
+                const center = document.createElement('div');
+                center.classList.add('center');
+                
+                flower.appendChild(petals);
+                flower.appendChild(center);
+                flowersContainer.appendChild(flower);
+            }
+        }
+        
+        // Controlar música
+        const audio = document.getElementById('birthdayAudio');
+        const playButton = document.getElementById('playButton');
+        
+        playButton.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                playButton.textContent = 'Pausar Música';
+            } else {
+                audio.pause();
+                playButton.textContent = 'Reproducir Música';
+            }
+        });
+        
+        // Efecto de confeti
+        document.getElementById('confettiButton').addEventListener('click', function() {
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+        });
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.innerHTML = ['❤', '✨', '⭐', '🎂', '🎁', '🎉'][Math.floor(Math.random() * 6)];
+            confetti.style.position = 'fixed';
+            confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+            confetti.style.color = ['#ff4d94', '#9c27b0', '#e91e63', '#ff9be0', '#f44336', '#ffeb3b'][Math.floor(Math.random() * 6)];
+            confetti.style.zIndex = '100';
+            confetti.style.top = '-50px';
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.opacity = '0';
+            confetti.style.transition = 'opacity 0.5s';
+            
+            document.body.appendChild(confetti);
+            
+            // Aparecer
+            setTimeout(() => {
+                confetti.style.opacity = '1';
+            }, 10);
+            
+            // Animación de caída
+            const animation = confetti.animate([
+                { top: '-50px', transform: 'rotate(0deg)' },
+                { top: window.innerHeight + 'px', transform: 'rotate(720deg)' }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.1, 0.8, 0.1, 1)'
+            });
+            
+            // Eliminar después de animación
+            animation.onfinish = () => {
+                confetti.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(confetti);
+                }, 500);
+            };
+        }
+        
+        // Inicializar
+        window.addEventListener('load', function() {
+            createHearts();
+            createFlowers();
+            
+            // Reproducir automáticamente después de interacción del usuario
+            document.body.addEventListener('click', function autoPlay() {
+                audio.play().catch(() => {
+                    // Si falla, mostrar botón de reproducción
+                    playButton.style.display = 'block';
+                });
+                document.body.removeEventListener('click', autoPlay);
+            }, { once: true });
+        });
+    </script>
 </body>
 </html>
